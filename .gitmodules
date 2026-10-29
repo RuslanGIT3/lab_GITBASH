@@ -1,0 +1,3 @@
+[submodule "app"]
+	path = app
+	url = https://github.com/batman333-boss/lab_GITBASH_library.git
