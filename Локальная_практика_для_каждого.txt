@@ -1,0 +1,116 @@
+ЛОКАЛЬНЫЕ УПРАЖНЕНИЯ 3.1–3.2. ВЫПОЛНИТЬ КАЖДОМУ ОТДЕЛЬНО
+Команды ниже — план, не результаты на ваших ПК.
+Откройте новое окно Git Bash. Если папка уже существует, выберите другое имя.
+Не запускайте откаты в lab_GITBASH. Не отправляйте эту историю в общий GitHub.
+ВАШЕ_ФИО и ВАША_ПОЧТА заменить своими данными в обоих новых репозиториях.
+Все команды и весь вывод сохраните в личный текстовый журнал.
+
+# 3.1. У Руслана имя каталога git-local-ruslan, у Марата git-local-marat.
+cd ~
+mkdir git-local-ruslan
+cd git-local-ruslan
+mkdir TMP
+cd TMP
+pwd
+ls
+git init -b master
+git config user.name "ВАШЕ_ФИО"
+git config user.email "ВАША_ПОЧТА"
+ls -a
+cd ..
+mkdir GitRepo
+mv TMP GitRepo/tmp
+cd GitRepo/tmp
+pwd
+git status
+
+# 3.2. Статусы и три коммита
+touch README.txt
+git status
+git add README.txt
+git status
+git commit -m "Добавлен файл README"
+printf 'Hello, world!\n' > README.txt
+git status
+git add README.txt
+git commit -m "Изменения в README"
+printf 'TEST\n' > test.txt
+printf 'Hello, world!!!\n' > README.txt
+git add README.txt test.txt
+git commit -m "Тестовый коммит с 2 изменениями"
+git log -3
+git log -p -1
+
+# Отмена — только в этом учебном репозитории
+git branch safety/before-reset
+printf 'Hello, world???\n' > README.txt
+rm test.txt
+git add -A
+git status --short
+git reset HEAD
+git status --short
+git checkout -- test.txt
+git checkout -- README.txt
+git status
+printf 'Hello, world???\n' > README.txt
+rm test.txt
+git reset --hard HEAD
+git status
+git reset --hard HEAD~1
+ls
+cat README.txt
+git log --oneline
+
+# Самостоятельная работа — новый репозиторий
+cd ../..
+mkdir independent
+cd independent
+git init -b master
+git config user.name "ВАШЕ_ФИО"
+git config user.email "ВАША_ПОЧТА"
+printf 'Start\n' > start.txt
+git status
+git add start.txt
+git status
+git commit -m "Начальный файл"
+printf 'A\n' > a.txt
+printf 'B\n' > b.txt
+printf 'C\n' > c.txt
+git add a.txt b.txt c.txt
+git commit -m "Добавлены три файла"
+printf 'A edited\n' > a.txt
+printf 'B edited\n' > b.txt
+git add a.txt b.txt
+git commit -m "Изменены два файла"
+printf 'A final\n' > a.txt
+rm b.txt
+printf 'D\n' > d.txt
+git add -A
+git commit -m "Изменение, удаление и добавление"
+mkdir nested
+printf 'One\n' > nested/one.txt
+printf 'Two\n' > nested/two.txt
+git add nested
+git commit -m "Файлы вложенной папки"
+rm nested/one.txt nested/two.txt
+git add -A
+git commit -m "Удалены файлы вложенной папки"
+rmdir nested
+git status
+# Пустая папка не хранится Git отдельно от файлов.
+git log --pretty=format:"%h | %an | %s"
+printf 'Stashed change\n' >> a.txt
+git diff
+git stash push -m "Учебные изменения"
+git status
+cat a.txt
+git stash apply
+git diff
+git stash list
+# apply сохраняет запись stash. Обычный stash не включает untracked; нужен -u.
+git restore a.txt
+git stash drop
+git status
+
+После каждого этапа вставляйте настоящий вывод в отчёт/личный журнал.
+Выйти из постраничного git log: клавиша Q.
